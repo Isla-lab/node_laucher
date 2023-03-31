@@ -2,8 +2,6 @@
 import json
 import sys
 from mqtt_client import MqttClient
-import time
-import queue
 import yaml
 import pathlib
 import os
@@ -17,7 +15,7 @@ class Node():
         if topic == "master_status/" + str(self.user) and pay["start"]:
             print('Your job is starting...\n')
             self.waiting_status_msg = True
-
+           
     def __init__(self):
         path = str(pathlib.Path(__file__).parent.resolve())
         with open(os.path.join(path, 'config', 'config.yaml')) as file:
@@ -53,11 +51,7 @@ class Node():
                 last_iter = False
 
                 try:
-                    name_file = self.job_path.split('/')[-1]
-
-
-            
-
+                   
                     with open(os.path.join(self.job_path)) as file:
                         lines = file.readlines()
             
@@ -66,18 +60,13 @@ class Node():
                         for i in range(len(lines)):
 
                             block_lines = []
-                            #print(f'\niteration: {i}')
-                            #print(f'index_lines: {index_lines}')
-                        
-
+                           
                             if index_lines+self.parallel <= len(lines):
                                 block_lines = lines[index_lines:index_lines+self.parallel]
                             else: 
                                 block_lines = lines[index_lines:len(lines)]
                                 last_iter = True
 
-                            #print(f'block_lines: {block_lines}')
-                            #print()
                             res = [-1]*len(block_lines)
                             p.clear()
                             
@@ -85,7 +74,6 @@ class Node():
                             for line in block_lines:
 
                                 args = shlex.split(str(line))
-                                #for i in range(job.parallel):
                                 p.append(subprocess.Popen(args))
                                     
                             start_time = datetime.datetime.now().second       
@@ -96,8 +84,6 @@ class Node():
                                     res[i] = p[i].wait(self.timeout - start_time)
 
                                 start_time = datetime.datetime.now().second
-
-                            #print(res)
 
                             for j in range(len(block_lines)):
                                 if res[j] != 0:
@@ -113,7 +99,6 @@ class Node():
                         print(e)
                         pass
 
-                    #print('test')
                 except Exception as e: 
                     print(e)
                     pass
@@ -129,11 +114,6 @@ class Node():
             
             if finished:
                 break
-
-
-            
-            
-
 
 
 if __name__ == '__main__':
