@@ -9,15 +9,15 @@ Our mini-cluster is based on a *publisher-subscriber* architecture. Specifically
 1) Get the credentials: contact alberto.castellini@univr.it to obtain credentials to one of the cluster nodes. In the email, specify whether you intend to use GPU or CPU only. The administrator given the availability of nodes will provide you with a username and password. 
 
 
-![Example Image](https://drive.google.com/file/d/1UWtWTpfrK6k5sOWMG6bxEo22E2ZYl5tl/view?usp=sharing)
 
+![](https://drive.google.com/uc?export=view&id=1UWtWTpfrK6k5sOWMG6bxEo22E2ZYl5tl)
 
 ### Resourses
-|                |CPU/RAM                          |GPU                         |
-|----------------|-------------------------------|---------|
-|Node 1|20 cores - 64 Gb|Nvidia RTX 4070ti 12 Gb|
-|Node 2|8 cores - 48 Gb |Nvidia RTX 2070 Super 8gb|
-|Node 3|8 cores - 32 Gb|Nvidia GTX Titan X |
+|      |CPU/RAM     |GPU      |
+|------|------------|---------|
+|Node 1|20 cores - 64 Gb|Nvidia RTX 4070 ti 12 Gb|
+|Node 2|8 cores - 48 Gb| Nvidia RTX 2070 Super 8gb|
+|Node 3|8 cores - 32 Gb| Nvidia GTX Titan X |
 Node 4|12 cores - 16 Gb| Nvidia GTX 960|
 
 
