@@ -7,7 +7,7 @@ This is the repo containing the instructions and code to access and run your pro
 Our mini-cluster is based on a *publisher-subscriber* architecture. Specifically, we report the steps to obtain login credentials and the procedures to be performed to launch the scripts on our machines.
 
 ### 1) **Get the credentials**: 
-contact alberto.castellini@univr.it to obtain credentials to one of the cluster nodes. In the email, specify whether you intend to use GPU or CPU only. The administrator given the availability of nodes will provide you with a username and password. 
+contact alberto.castellini@univr.it to obtain credentials to one of the cluster nodes. In the email, specify whether you intend to use GPU or CPU only. The administrator given the availability of nodes will provide you with a username, password and the IP address of the node assigned. 
 
 
 
@@ -23,12 +23,20 @@ contact alberto.castellini@univr.it to obtain credentials to one of the cluster 
 Node 4|12 cores - 16 Gb| Nvidia GTX 960|
 
 ### 2) **Prepare your script and environment**: 
-the second step involves preparing scripts to run on the cluster **on your machine(!)**, that is, the cluster should be used only to run jobs and not to program. Moreover, the result of the code execution should be written in a specific file (txt, csv, etc...). *For the time being, our mini-cluster only supports the execution of python scripts.* Below are all the instructions for copying and eventually creating your own python virtual environment.
+the second step involves preparing scripts to run on the cluster **on your machine(!)**, that is, the cluster should be used only to run jobs and not to program. Moreover, the result of the code execution should be written in a specific file (txt, csv, etc...). 
+
+> <ins>*For the time being, our mini-cluster only supports the execution
+> of python scripts.*<ins>
+> 
+> If you need to run any particular scripts other than python, send an email to alberto.castellini@univr.it.
+
+
+Below are all the instructions for copying and eventually creating your own python virtual environment.
 
 ![](https://drive.google.com/uc?export=view&id=17tG2-YtLuNz4txxzLLRhvUm4JMuCRW7w)
 
 #### Access to the assigned node and transfer files
-To access the assigned node, *ssh* should be used. In particular, open a terminal in your pc and type:
+To access the assigned node, *ssh* and a VPN should be used. In particular, once you have connected to the univr net using a VPN, open a terminal in your pc and type:
 ```bash
 > ssh username@IP_Node
 ```
@@ -86,8 +94,9 @@ where *home/student/example.py* should be replaced with the absolute path to the
 
 In order to use the mini-cluster, once you entered in ssh in the node, 
 you should clone this repo https://github.com/Isla-lab/node_laucher.
-In order to use the GPU you should follow these steps: 
- 
+
+> In order to use the GPU you should follow these steps:
+
 ```bash
 > cd node_laucher
 > ./add_paths
@@ -109,8 +118,9 @@ Screen or GNU Screen is a terminal multiplexer. In other words, it means that yo
 - *username*: the username used to log in to SSH.
 - */home/username/path_to_your_script/your_script.py*: absolute path to the end to run inside the node (you can retrieve the absolute path by typing the pwd command from terminal)
 - *GPU*: boolean to indicate whether or not you want to use the GPU
-- *n_parallel*: if GPU to False is an integer >= 1 indicating how many rows you want to run in parallel of the *username_config.txt* file.
+- *n_parallel*: if GPU == False should be an integer $\geq$ 1 indicating how many rows you want to run in parallel of the *username_config.txt* file.
 
+Regarding the parameter *n_parallel*, as specified it is possible to indicate how many lines of the configuration .txt file run in parallel. Please do some preliminary tests on your machine to understand the load on the CPU cores before launching on the node. We report in the next section on *best practices* for preparing python scripts to catch any runtime or other errors.
 
-**Practical example:**
-suppose you want to run the test.py file located in the home of the assigned node.  
+## Practical example:
+Suppose you want to run the test.py file located in the home of the assigned node.  
