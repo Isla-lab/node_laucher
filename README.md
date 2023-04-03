@@ -15,12 +15,12 @@ contact alberto.castellini@univr.it to obtain credentials to one of the cluster 
 
 
 ### Resourses
-|      |CPU/RAM     |GPU      |
+|      |CPU - RAM     |GPU      |
 |------|------------|---------|
 |Node 1|20 cores - 64 Gb|Nvidia RTX 4070 ti 12 Gb|
-|Node 2|8 cores - 48 Gb| Nvidia RTX 2070 Super 8gb|
+|Node 2|8 cores - 48 Gb| Nvidia RTX 2070 Super 8Gb|
 |Node 3|8 cores - 32 Gb| Nvidia GTX Titan X |
-Node 4|12 cores - 16 Gb| Nvidia GTX 960|
+Node 4|12 cores - 8 Gb| - |
 
 ### 2) **Prepare your script and environment**: 
 the second step involves preparing scripts to run on the cluster **on your machine(!)**, that is, the cluster should be used only to run jobs and not to program. Moreover, the result of the code execution should be written in a specific file (txt, csv, etc...). 
@@ -107,7 +107,7 @@ you should clone this repo https://github.com/Isla-lab/node_laucher.
 To run your jobs on the assigned node of the mini-cluster just type:
 
 ```bash
-> screen -S name_screen -dm bash -c 'python node.py username /home/username/path_to_your_script/your_script.py GPU n_parallel'
+> screen -S name_screen -dm bash -c 'python node.py username /home/username/path_to_your_script/your_config.txt GPU n_parallel'
 ```
 
 Screen or GNU Screen is a terminal multiplexer. In other words, it means that you can start a screen session and then open any number of windows (virtual terminals) inside that session. Processes running in Screen will continue to run when their window is not visible even if you get disconnected. 
