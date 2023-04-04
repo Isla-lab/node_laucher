@@ -19,7 +19,7 @@ contact alberto.castellini@univr.it to obtain credentials to one of the cluster 
 |------|------------|---------|
 |Node 1|20 cores - 64 Gb|Nvidia RTX 4070 ti 12 Gb|
 |Node 2|8 cores - 48 Gb| Nvidia RTX 2070 Super 8Gb|
-|Node 3|8 cores - 32 Gb| Nvidia GTX Titan X |
+|Node 3|8 cores - 32 Gb| Nvidia GTX Titan X 12 Gb|
 Node 4|12 cores - 8 Gb| - |
 
 ### 2) **Prepare your script and environment**: 
