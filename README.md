@@ -83,7 +83,7 @@ In order to run your scripts in the assigned node you need to create a txt confi
 python /home/student/example.py parameter1 parameter2
 ```
 
-where *home/student/example.py* should be replaced with the absolute path to the python file, in the assigned node, to be run. parameter1, paramenters2 should be replaced with the ones necessary (if any). Multiple rows can be specified in the file, where each row can have different parameters (e.g., different seeds). 
+where *home/student/example.py* should be replaced with the absolute path to the python file (in the assigned node) to be run. parameter1, paramenters2 should be replaced with the ones necessary (if any). Multiple rows can be specified in the file, where each row can have different parameters (e.g., different seeds). 
 
 
 ### 3) **Run your jobs in the mini-cluster**: 
