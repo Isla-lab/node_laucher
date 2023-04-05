@@ -7,6 +7,7 @@ import pathlib
 import os
 import shlex, subprocess
 import datetime
+import time
 
 class Node():
 
@@ -74,8 +75,21 @@ class Node():
                             for line in block_lines:
 
                                 args = shlex.split(str(line))
-                                p.append(subprocess.Popen(args))
+                            
+                                if not os.path.exists(args[1]):
+                                    print('No such python file')
+                                    print(f'Path provided: {args[1]}')
+                                    data = {"start": False, "end": True}
+                                    payload = json.dumps(data)
+                                    self.client.publish("node_status/" + str(self.user), payload)
+                                    self.client.stop()
+                                    finished = True
+                                    print('\nEnd all your jobs!')
+                                    time.sleep(10)
+                                    return
                                     
+                                p.append(subprocess.Popen(args))
+                                        
                             start_time = datetime.datetime.now().second       
                             end_time = start_time + self.timeout
 
