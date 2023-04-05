@@ -51,10 +51,10 @@ Now you are inside the assigned node. As specified before, you should not code i
 (the password will be required). Once you are inside the node in this mode, just type in the terminal:
 
 ```bash
-> put -r Desktop/example.py
+> put -r Desktop/example.py /home/student/Desktop/
 ```
 
-This comand will copy your python script in the assigned node. Similarly you can retrive files from the node to your computer using:
+This comand will copy your python script (located in your pc) in the Desktop folder of the assigned node. Similarly you can retrive files from the node to your computer using:
 
 ```bash
 > get -r /home/student/example.py
@@ -107,7 +107,7 @@ you should clone this repo https://github.com/Isla-lab/node_laucher.
 To run your jobs on the assigned node of the mini-cluster just type:
 
 ```bash
-> screen -S name_screen -dm bash -c 'python node.py username /home/username/path_to_your_script/your_config.txt GPU n_parallel'
+> screen -S name_screen -dm bash -c 'python node.py username /home/username/path_to_your_config/your_config.txt GPU n_parallel'
 ```
 
 Screen or GNU Screen is a terminal multiplexer. In other words, it means that you can start a screen session and then open any number of windows (virtual terminals) inside that session. Processes running in Screen will continue to run when their window is not visible even if you get disconnected. 
@@ -123,15 +123,117 @@ Screen or GNU Screen is a terminal multiplexer. In other words, it means that yo
 Regarding the parameter *n_parallel*, as specified it is possible to indicate how many lines of the configuration .txt file run in parallel. Please do some preliminary tests on your machine to understand the load on the CPU cores before launching on the node. We report in the next section on *best practices* for preparing python scripts to catch any runtime or other errors.
 
 ## Practical example:
-Suppose you (username: *student*) want to run the example.py created in your pc. First of all, connect via VPN to the UNIVR network. Now that we are connected to the UNIVR network, let's connect via SSH to the assigned node (for this example, the node will be called *server*). Hence, let's open a terminal and digit:
+Suppose we (username: *student*) want to run the example.py created in your pc. Suppose the file is something like this:
 
-```bash
-> ssh student@<IP_Node_server>
+```python
+import sys
+from datetime import datetime
+import time
+import logging
+logging.basicConfig(filename=f'output_{datetime.now().strftime("%d-%m-%Y_%H:%M:%S")}.log', level=logging.DEBUG)
+logger=logging.getLogger(__name__)
+
+try:
+    arg1 = sys.argv[1]
+    logger.info(arg1)
+    print(arg1)
+    time.sleep(10)
+
+except Exception as e: 
+    logger.error(e)
+
 ```
 
-If everything is correct you should see in the terminal 
+This script simply creates a log file where any errors will be saved. It then prints on the screen the parameters that are passed to the script. Please notice that it is good practice to put your code enclosed in *try-except* comands, in order to figure out why your script possibly does not work.
+We then create the *.txt* configuration file in order to run our script on the assigned node. Specifically, suppose we want to use only the CPU and send 2 executions in parallel at a time. So we write the file as:
+
+```txt
+python /home/student/Desktop/example_file.py hello_1
+python /home/student/Desktop/example_file.py hello_2
+python /home/student/Desktop/example_file.py hello_3
+python /home/student/Desktop/example_file.py hello_4
+python /home/student/Desktop/example_file.py hello_5
+python /home/student/Desktop/example_file.py hello_6
+python /home/student/Desktop/example_file.py hello_7
+```
+Hence, we specify the command (python) and the absolute path where our script will be copied to the assigned node. Finally as the last arguments any parameters that our script requires (if needed).
+
+
+### copying the file in the assigned node:
+
+First of all, we connect via VPN to the UNIVR network. Now that we are connected to the UNIVR network, let's access via SSH to the assigned node (for this example, the node will be called *server*). Hence, let's open a terminal and digit:
+
+```bash
+ssh student@<IP_Node_server>
+```
+
+If everything is correct you should see in the terminal: 
 
 ```bash
 student@pop-os:~$
 ```
 
+Now open another terminal window and navigate in the folder where the files we want to copy are located. Here we again access the assigned node but this time with sftp:
+
+```bash
+sftp student@<IP_Node_server>
+```
+
+If everything is correct you should see in the terminal: 
+
+```bash
+Connected to <IP_Node_server>.
+sftp>
+```
+
+We now copy the files in the assigned node usign the terminal with sftp with the commands:
+
+```bash
+sftp> put -r example.py /home/student/Desktop/
+```
+
+```bash
+sftp> put -r student_config.txt /home/student/Desktop/
+```
+
+Now by typing the ls command into the desktop of the assigned node we should see our files.
+
+### running our script in the assigned node:
+
+First of all install paho-mqtt using this command:
+
+```bash
+pip install paho-mqtt
+```
+Let's now clone this repo in the assigned node. In the terminal with ssh type:
+
+```bash
+git clone https://github.com/Isla-lab/node_laucher.git
+```
+
+To launch the script on the assigned machine, we type the following command in the terminal with ssh:
+
+```bash
+screen -S name_screen -dm bash -c 'python node_laucher/node.py student /home/student/Desktop/student_config.txt False 2'
+```
+To check the terminal use: 
+```bash
+screen -r name_screen
+```
+
+To detach from the screen using ctrl+a and ctrl+d
+
+```bash
+Your job is starting...
+
+hello_2
+hello_1
+hello_3
+hello_4
+hello_6
+hello_5
+hello_7
+
+End all your jobs!
+[screen is terminating]
+```
