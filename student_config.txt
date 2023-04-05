@@ -1,0 +1,7 @@
+python /home/student/Desktop/example.py hello_1
+python /home/student/Desktop/example.py hello_2
+python /home/student/Desktop/example.py hello_3
+python /home/student/Desktop/example.py hello_4
+python /home/student/Desktop/example.py hello_5
+python /home/student/Desktop/example.py hello_6
+python /home/student/Desktop/example.py hello_7
