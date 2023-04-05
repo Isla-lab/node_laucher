@@ -216,12 +216,16 @@ To launch the script on the assigned machine, we type the following command in t
 ```bash
 screen -S name_screen -dm bash -c 'python node_laucher/node.py student /home/student/Desktop/student_config.txt False 2'
 ```
+ 
+This comand will run two rows of your config.txt in parallel using CPU, until the end of the file.
 To check the terminal use: 
+ 
 ```bash
 screen -r name_screen
 ```
 
-To detach from the screen using ctrl+a and ctrl+d
+To detach from the screen using ctrl+a and ctrl+d. 
+The result on your screen should be:
 
 ```bash
 Your job is starting...
@@ -237,3 +241,5 @@ hello_7
 End all your jobs!
 [screen is terminating]
 ```
+ 
+
