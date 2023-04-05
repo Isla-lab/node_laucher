@@ -38,14 +38,14 @@ Below are all the instructions for copying and eventually creating your own pyth
 #### Access to the assigned node and transfer files
 To access the assigned node, *ssh* and a VPN should be used. In particular, once you have connected to the univr net using a VPN, open a terminal in your pc and type:
 ```bash
-> ssh username@IP_Node
+> ssh username@<IP_Node>
 ```
 and click enter (the password will be required). 
 
 Now you are inside the assigned node. As specified before, you should not code inside the node. Once you have create in your pc all the necessary python scripts to be execute inside the node, you can transfer these scripts using *sftp* or *scp*. For example suppose you have the file *example.py* in your desktop and you want to copy this file from your pc to the assigned node.  Just open another terminal and type:
 
 ```bash
-> sftp username@IP_Node
+> sftp username@<IP_Node>
 ```
 
 (the password will be required). Once you are inside the node in this mode, just type in the terminal:
@@ -123,4 +123,15 @@ Screen or GNU Screen is a terminal multiplexer. In other words, it means that yo
 Regarding the parameter *n_parallel*, as specified it is possible to indicate how many lines of the configuration .txt file run in parallel. Please do some preliminary tests on your machine to understand the load on the CPU cores before launching on the node. We report in the next section on *best practices* for preparing python scripts to catch any runtime or other errors.
 
 ## Practical example:
-Suppose you want to run the test.py file located in the home of the assigned node.  
+Suppose you (username: *student*) want to run the example.py created in your pc. First of all, connect via VPN to the UNIVR network. Now that we are connected to the UNIVR network, let's connect via SSH to the assigned node (for this example, the node will be called *server*). Hence, let's open a terminal and digit:
+
+```bash
+> ssh student@<IP_Node_server>
+```
+
+If everything is correct you should see in the terminal 
+
+```bash
+student@pop-os:~$
+```
+
