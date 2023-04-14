@@ -214,7 +214,7 @@ git clone https://github.com/Isla-lab/node_laucher.git
 To launch the script on the assigned machine, we type the following command in the terminal with ssh:
 
 ```bash
-screen -S name_screen -dm bash -c 'python node_laucher/node.py student /home/student/Desktop/student_config.txt False 2'
+screen -S name_screen -dm bash -c 'python node_launcher/node.py student /home/student/Desktop/student_config.txt False 2'
 ```
  
 This comand will run two rows of your config.txt in parallel using CPU, until the end of the file.
