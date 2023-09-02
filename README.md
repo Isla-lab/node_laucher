@@ -200,10 +200,11 @@ Now by typing the ls command into the desktop of the assigned node we should see
 
 ### running our script in the assigned node:
 
-First of all install paho-mqtt using this command:
+First of all install paho-mqtt and yaml using this command:
 
 ```bash
 pip install paho-mqtt
+pip install pyyaml
 ```
 Let's now clone this repo in the assigned node. In the terminal with ssh type:
 
